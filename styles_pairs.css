@@ -1,0 +1,23 @@
+
+#PairsContainer
+{
+    display: flex;
+    flex-direction: column;
+    background-color: blue;
+    justify-content: space-evenly;
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+#PairsContainer .PairsContainerRow
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 25px;
+}
+
+.PairsBox
+{
+    flex-grow: 1;
+    aspect-ratio: 1/1;
+}

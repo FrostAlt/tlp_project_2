@@ -1,0 +1,47 @@
+
+/* Flexbox help found here: https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+
+#QuizContainer
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    /* align-content: space-between; */
+    /* align-content: space-around; */
+    align-content: center;
+    background-color: blue;
+    width: auto;
+    align-items: center;
+    /* width: 100%;
+    height: 100%; */
+}
+
+#QuizMessage
+{
+    font-size: x-large;
+    background-color: yellow;
+}
+
+.QuizOption
+{
+    width: 15rem;
+    height: 3rem;
+    /* text-align: left; */
+    font-size: large;
+
+}
+.QuizOption.Fail
+{
+    background-color: red;
+}
+.QuizOption.Success
+{
+    background-color: lime;
+}
+
+#QuizNextButton
+{
+    font-size: large;
+}
+
