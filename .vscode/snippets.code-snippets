@@ -1,0 +1,45 @@
+{
+	// Place your tlp_project_2 workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"Quiz Question":{
+		"scope": "javascript",
+		// For some reason having a space in prefix causes everything to dedent
+		// by 1 space, cannot find anything about this on web...
+		"prefix": ["quiz_question","question"],
+		"body": [
+			"{",
+			"\ttype: Quiz.QTYPE.${1:TEXT},",
+			"\tmessage: \"$2\",",
+			"\taudio: \"$3\",",
+			"\toptions:",
+			"\t[",
+			"\t\t\"${4:Option1}\",",
+			"\t\t\"${5:Option2}\",",
+			"\t\t\"${6:Option3}\",",
+			"\t\t\"${7:Option4}\"",
+			"\t],",
+			"\tanswers:",
+			"\t[",
+			"\t\t\"${4:Option1}\",",
+			"\t]",
+			"},",
+			"$0"
+		],
+		"description": ""
+	},
+}

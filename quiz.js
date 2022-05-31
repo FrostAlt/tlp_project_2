@@ -52,23 +52,7 @@ Quiz.QTYPE =
  */
 Quiz.questions =
 [
-    // Left here as template until snippet is created.
-    // {
-    //     type: QTYPE.TEXT,
-    //     message: "",
-    //     audio: "",
-    //     options:
-    //     [
-    //         "Option 1",
-    //         "Option 2",
-    //         "Option 3",
-    //         "Option 4"
-    //     ],
-    //     answers:
-    //     [
-    //         "Option 2",
-    //     ]
-    // },
+    // Snippet prefix: quiz_question, question
     {
         type: Quiz.QTYPE.TEXT,
         message: "Test message for test question 1 for test setup.",
@@ -85,6 +69,105 @@ Quiz.questions =
             "Option 2",
         ]
     },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "What is Captain America's real name?",
+        audio: "",
+        options:
+        [
+            "Steve Rogers",
+            "Steve Rangers",
+            "Sam Rangers",
+            "Sam Wallers"
+        ],
+        answers:
+        [
+            "Steve Rogers",
+            "Steve Grant Rogers",
+            "Steven Rogers",
+            "Steven Grant Rogers"
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "Which infinity stone did Thanos sacrifice his adopted daughter Gamora for?",
+        audio: "",
+        options:
+        [
+            "Soul stone",
+            "Reality stone",
+            "Mind stone",
+            "Time stone"
+        ],
+        answers:
+        [
+            "Soul stone",
+            "Soul",
+            "The Soul stone"
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "Which infinity stone gave Captain Marverl her powers?",
+        audio: "",
+        options:
+        [
+            "Space stone",
+            "Power stone",
+            "Reality stone",
+            "Mind stone"
+        ],
+        answers:
+        [
+            "Space stone",
+            "Space",
+            "The Space stone"
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "In Iron Man 2 what did Mickey Rourke's character (Whiplash) ask Stark's competitor Justin Hammer to retrieve from Russia?",
+        audio: "",
+        options:
+        [
+            "His bird",
+            "His father",
+            "His tools",
+            "His blueprints"
+        ],
+        answers:
+        [
+            "His bird",
+            "Irina",
+            "bird",
+            "his bird",
+            "his bird irina",
+            "cockatoo",
+            "his cockatoo",
+            "his pet cockatoo",
+            "his pet irina"
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "Which movie did Spiderman make his first appearance?",
+        audio: "",
+        options:
+        [
+            "Captain America: Civil War",
+            "Spiderman: Homecoming",
+            "Spiderman: Far From Home",
+            "Avengers: Infinity War"
+        ],
+        answers:
+        [
+            "Captain America: Civil War",
+            "Civil War",
+            "Captain America Civil War"
+        ]
+    },
+    
+    
 ];
 
 /**
@@ -94,10 +177,10 @@ Quiz.questions =
  */
 Quiz.IsAnswerCorrect = (answer)=>
 {
-    if (this.currentQuestion != null)
+    if (Quiz.currentQuestion != null)
     {
         answer = answer.toLowerCase();
-        for (const _answer of this.currentQuestion.answers)
+        for (const _answer of Quiz.currentQuestion.answers)
         {
             if (_answer.toLowerCase() == answer) return true;
         }
@@ -107,8 +190,18 @@ Quiz.IsAnswerCorrect = (answer)=>
 
 Quiz.OptionClickCallback = (e)=>
 {
-    console.log(e.target);
-    e.target.textContent = "SLKJDF";
+    if (Quiz.IsAnswerCorrect(e.target.textContent))
+    {
+        e.target.classList.add("Success");
+    }
+    else
+    {
+        e.target.classList.add("Fail");
+    }
+    Quiz.ElementButtons.forEach(btn => {
+        DisableGameElement(btn);
+    });
+    EnableGameElement(Quiz.ElementNextButton);
 };
 
 /**
@@ -122,7 +215,7 @@ Quiz.Setup = ()=>
     for (let i = 0; i < 4; i++) {
         Quiz.ElementButtons[i] = CreateGameElement(`QuizButton${i}`, GAME_ELEMENT_TYPE.BUTTON, Quiz.ElementArea);
         Quiz.ElementButtons[i].classList.add("QuizOption");
-        Quiz.ElementButtons[i].addEventListener("click", Quiz.OptionClickCallback);
+        AddElementClickCallback(Quiz.ElementButtons[i], Quiz.OptionClickCallback);
     }
     Quiz.ElementNextButton = CreateGameElement("QuizNextButton", GAME_ELEMENT_TYPE.BUTTON, Quiz.ElementArea);
     Quiz.ElementNextButton.textContent = "Next";
@@ -145,6 +238,7 @@ Quiz.Play = ()=>
 Quiz.SetQuestion = (index)=>
 {
     let question = Quiz.questions[index];
+    Quiz.currentQuestion = question;
     Quiz.ElementMessage.textContent = document.createTextNode(question.message).textContent;
     for (let i = 0; i < question.options.length; i++) {
         const button = Quiz.ElementButtons[i];

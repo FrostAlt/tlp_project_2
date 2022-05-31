@@ -62,13 +62,28 @@ function DisableGameElement(element)
  * Enable a game element, especially a button.
  * @param {HTMLElement} element 
  */
- function EnableGameElement(element)
- {
-     if (element.classList.contains("disabled"))
-     {
-         element.classList.remove("disabled");
-     }
- }
+function EnableGameElement(element)
+{
+    if (element.classList.contains("disabled"))
+    {
+        element.classList.remove("disabled");
+    }
+}
+
+ /**
+  * 
+  * @param {HTMLElement} element 
+  * @param {function} callback 
+  */
+function AddElementClickCallback(element, callback)
+{
+    element.addEventListener("click", (e)=>{
+        if (!element.classList.contains("disabled"))
+        {
+            callback(e);
+        }
+    });
+}
 
 
 // /**
@@ -109,24 +124,24 @@ function ShuffleArray(array)
     console.log("Game ready.");
     console.log(`After load area ${document.querySelector("#GameArea")}`);
 
-    let gameSelector = CreateGameElement("GameSelector");
-    let gameSelectorQuizButton = CreateGameElement("GameSelectorQuizButton", GAME_ELEMENT_TYPE.BUTTON, gameSelector);
-    gameSelectorQuizButton.textContent = "QUIZ";
-    gameSelectorQuizButton.addEventListener("click", ()=>{
-        ClearGameArea();
-        Quiz.Play();
-    });
-    let gameSelectorPairsButton = CreateGameElement("GameSelectorPairsButton", GAME_ELEMENT_TYPE.BUTTON, gameSelector);
-    gameSelectorPairsButton.textContent = "PAIRS";
-    gameSelectorPairsButton.addEventListener("click", ()=>{
-        ClearGameArea();
-        Pairs.Play();
-    });
-    ShowGameElement(gameSelector);
+    // let gameSelector = CreateGameElement("GameSelector");
+    // let gameSelectorQuizButton = CreateGameElement("GameSelectorQuizButton", GAME_ELEMENT_TYPE.BUTTON, gameSelector);
+    // gameSelectorQuizButton.textContent = "QUIZ";
+    // gameSelectorQuizButton.addEventListener("click", ()=>{
+    //     ClearGameArea();
+    //     Quiz.Play();
+    // });
+    // let gameSelectorPairsButton = CreateGameElement("GameSelectorPairsButton", GAME_ELEMENT_TYPE.BUTTON, gameSelector);
+    // gameSelectorPairsButton.textContent = "PAIRS";
+    // gameSelectorPairsButton.addEventListener("click", ()=>{
+    //     ClearGameArea();
+    //     Pairs.Play();
+    // });
+    // ShowGameElement(gameSelector);
 
     Pairs.Setup();
     Quiz.Setup();
 
-    // Quiz.Play();
+    Quiz.Play();
     // Quiz.TestSetup();
 })();
