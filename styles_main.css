@@ -10,6 +10,7 @@ body
 
     --button-bg-color: var(--main-primary-color);
     --button-bg-color-hover: #1c65d1;
+    --button-bg-color-active: #18488f;
     --button-bg-color-disabled: #1d57ae83;
     --button-text-color: var(--main-bg-color);
     --button-text-color-hover: var(--main-bg-color);
@@ -24,8 +25,9 @@ body.dark
 
     --button-bg-color: var(--main-primary-color);
     --button-bg-color-hover: #1c65d1;
+    --button-bg-color-active: #18488f;
     --button-bg-color-disabled: #1d57ae83;
-    --button-text-color: var(--main-bg-color);
+    --button-text-color: var(--main-text-color);
     --button-text-color-hover: var(--main-bg-color);
     --button-text-color-disabled: var(--main-bg-color);
 }
@@ -43,7 +45,18 @@ body.dark
     cursor: pointer;
     background-color: var(--button-bg-color);
     color: var(--button-text-color);
+
+    /* Used to stop the text selection on rapid clicks */
+    /* https://stackoverflow.com/a/4407335/15190248 */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
+/* Button hover */
 .GameElementButton:hover:not(.disabled)
 {
     /* Decided against brightness because it ruins quiz stylings. */
@@ -54,6 +67,11 @@ body.dark
 .GameElementButton:hover:not(.disabled):not(.static)
 {
     transform: scale(1.05);
+}
+/* Button pressed */
+.GameElementButton:active:not(.disabled)
+{
+    background-color: var(--button-bg-color-active);
 }
 .GameElementButton:active:not(.disabled):not(.static)
 {
@@ -116,15 +134,44 @@ audio::-webkit-media-controls-time-remaining-display
 
 #NavArea
 {
+    /* position: relative; */
     display: flex;
+    flex-direction: row;
     justify-content: center;
+    /* align-items: center; */
     background-color: var(--main-primary-color);
     width: 100%;
-    height: 3rem;
+    height: 4rem;
 }
-#colorSchemeButton
+.NavButtonLabel
 {
-    width:3rem;
+    display:none;
+}
+.nav-button
+{
+    aspect-ratio: 1 / 1;
+}
+
+
+#StartButtonContainer
+{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* font-variation-settings: 'OPSZ' 40; */
+}
+#StartButtonContainer .material-symbols-outlined
+{
+    font-size: 5rem;
+}
+.StartButton
+{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 2rem;
+    padding: 15px;
+    aspect-ratio: 1/1;
 }
 
 #GameArea
@@ -163,10 +210,38 @@ audio::-webkit-media-controls-time-remaining-display
 
 @media (min-width: 992px)
 {
+    .NavButtonLabel
+    {
+        display:block;
+    }
+    #NavArea
+    {
+        gap:20px;
+    }
+    /* Aspect ratio doesn't work here for some reason, hardcoded */
+    #colorSchemeButton
+    {
+        width: 4rem;
+    }
+
+    #StartButtonContainer
+    {
+        flex-direction: row;
+    }
+    #StartButtonContainer .material-symbols-outlined
+    {
+        font-size: 8rem;
+    }
+    .StartButton
+    {
+        font-size: 4rem;
+    }
+    
     #GameSelector .GameElementButton
     {
         /* margin: 0.5rem; */
         width: 20vw;
         height: 20vw;
     }
+
 }

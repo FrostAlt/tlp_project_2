@@ -139,6 +139,18 @@ function ShuffleArray(array)
     console.log("Game ready.");
     console.log(`After load area ${document.querySelector("#GameArea")}`);
     document.querySelector("#colorSchemeButton").addEventListener("click", ToggleColorScheme);
+    const playPairs = ()=>{
+        ClearGameArea();
+        Pairs.Play();
+    };
+    const playQuiz = ()=>{
+        ClearGameArea();
+        Quiz.Play();
+    };
+    document.querySelector("#playPairsButton").addEventListener("click", playPairs);
+    document.querySelector("#playQuizButton").addEventListener("click", playQuiz);
+    document.querySelector("#playPairsButtonStart").addEventListener("click", playPairs);
+    document.querySelector("#playQuizButtonStart").addEventListener("click", playQuiz);
 
     // let gameSelector = CreateGameElement("GameSelector");
     // let gameSelectorQuizButton = CreateGameElement("GameSelectorQuizButton", GAME_ELEMENT_TYPE.BUTTON, gameSelector);
@@ -158,7 +170,7 @@ function ShuffleArray(array)
     Pairs.Setup();
     Quiz.Setup();
 
-    Quiz.Play();
+    // Quiz.Play();
     // Quiz.ShowStats();
     // Quiz.TestSetup();
 })();

@@ -21,15 +21,45 @@
 <body>
     <div id="MainContainer">
         <div id="NavArea">
-            <div id="colorSchemeButton" class="GameElementButton static" title="Toggle colour scheme">
+            <div id="playPairsButton" class="GameElementButton static nav-button" title="Play pairs game.">
+                <span id="playQuizButtonIcon" class="material-symbols-outlined">
+                    casino
+                </span>
+                <span class="NavButtonLabel">Play Pairs</span>
+            </div>
+            <div id="playQuizButton" class="GameElementButton static nav-button" title="Play quiz game.">
+                <span id="playQuizButtonIcon" class="material-symbols-outlined">
+                    quiz
+                </span>
+                <span class="NavButtonLabel">Play Quiz</span>
+            </div>
+            <div id="colorSchemeButton" class="GameElementButton static nav-button" title="Toggle colour scheme.">
                 <span id="colorSchemeButtonIcon" class="material-symbols-outlined">
                     dark_mode
                 </span>
             </div>
         </div>
-        <div id="GameArea"></div>
+        <!-- Main game area, only starts with bigger nav buttons -->
+        <!-- Actual game content is generated with JS -->
+        <div id="GameArea">
+            <div id="StartButtonContainer">
+                <div id="playPairsButtonStart" class="GameElementButton StartButton" title="Play pairs game.">
+                    Play Pairs
+                    <span id="" class="material-symbols-outlined">
+                        casino
+                    </span>
+                </div>
+                <div id="playQuizButtonStart" class="GameElementButton StartButton" title="Play quiz game.">
+                    Play Quiz
+                    <span id="" class="material-symbols-outlined">
+                        quiz
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Code is executed after DOM load -->
     <script src="pairs.js"></script>
     <script src="quiz.js"></script>
     <script src="main.js"></script>
