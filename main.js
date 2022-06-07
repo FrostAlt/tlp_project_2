@@ -159,5 +159,6 @@ function ShuffleArray(array)
     Quiz.Setup();
 
     Quiz.Play();
+    // Quiz.ShowStats();
     // Quiz.TestSetup();
 })();

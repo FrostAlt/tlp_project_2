@@ -217,13 +217,7 @@ Quiz.NextClickCallback = (e)=>
     console.log(Quiz.currentQuestionIndex, Quiz.questions.length);
     if (Quiz.currentQuestionIndex >= Quiz.questions.length-1)
     {
-        // End of questions. Show stats.
-        // This is a test, replace with element set up.
-        const testStats = CreateGameElement("");
-        const stat = (Quiz.CorrectQuestions / Quiz.questions.length) * 100;
-        testStats.textContent = `${Quiz.CorrectQuestions} / ${Quiz.questions.length}\n${stat}%`;
-        ClearGameArea();
-        ShowGameElement(testStats);
+        Quiz.ShowStats();
     }
     else
     {
@@ -231,6 +225,21 @@ Quiz.NextClickCallback = (e)=>
         Quiz.currentQuestionIndex++;
         Quiz.SetQuestion(Quiz.currentQuestionIndex);
     }
+};
+
+Quiz.ShowStats = ()=>
+{
+    // End of questions. Show stats.
+    // This is a test, replace with element set up.
+    const testStats = CreateGameElement("QuizStats");
+    testStats.textContent = "Quiz Complete!";
+    const statPercent = CreateGameElement("QuizStatsPercent","",testStats);
+    const statAnswered = CreateGameElement("QuizStatsAnswered","",testStats);
+    const percent = Math.floor((Quiz.CorrectQuestions / Quiz.questions.length) * 100);
+    statPercent.textContent = `${percent}%`;
+    statAnswered.textContent = `${Quiz.CorrectQuestions} / ${Quiz.questions.length}`;
+    ClearGameArea();
+    ShowGameElement(testStats);
 };
 
 /**
