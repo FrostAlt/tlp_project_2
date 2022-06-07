@@ -1,7 +1,33 @@
 
+
 body
 {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --main-bg-color: #EEEEEE;
+    --main-text-color: #0E0E0E;
+    --main-primary-color: #1D57AE;
+    --shadow-text-color: #181818; /* unused */
+
+    --button-bg-color: var(--main-primary-color);
+    --button-bg-color-hover: #1c65d1;
+    --button-bg-color-disabled: #1d57ae83;
+    --button-text-color: var(--main-bg-color);
+    --button-text-color-hover: var(--main-bg-color);
+    --button-text-color-disabled: var(--main-bg-color);
+}
+body.dark
+{
+    --main-bg-color: #0E0E0E;
+    --main-text-color: #EEEEEE;
+    --main-primary-color: #1D57AE;
+    --shadow-text-color: #181818; /* unused */
+
+    --button-bg-color: var(--main-primary-color);
+    --button-bg-color-hover: #1c65d1;
+    --button-bg-color-disabled: #1d57ae83;
+    --button-text-color: var(--main-bg-color);
+    --button-text-color-hover: var(--main-bg-color);
+    --button-text-color-disabled: var(--main-bg-color);
 }
 
 .GameElementButton
@@ -12,26 +38,68 @@ body
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: white;
     font-size: x-large;
     transition: transform,background-color 0.05s;
     cursor: pointer;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
 }
 .GameElementButton:hover:not(.disabled)
 {
-    background-color: rgb(205, 212, 221);
+    /* Decided against brightness because it ruins quiz stylings. */
+    /* filter: brightness(1.2); */
+    background-color: var(--button-bg-color-hover);
+    color: var(--button-text-color-hover);
+}
+.GameElementButton:hover:not(.disabled):not(.static)
+{
     transform: scale(1.05);
 }
-.GameElementButton:active:not(.disabled)
+.GameElementButton:active:not(.disabled):not(.static)
 {
     transform: scale(0.95);
 }
 .GameElementButton.disabled
 {
-    background-color: gray;
-    color: darkgray;
     cursor: default;
+    /* filter: brightness(0.5); */
+    background-color: var(--button-bg-color-disabled);
+    color: var(--button-text-color-disabled);
 }
+
+audio::-webkit-media-controls-panel
+{
+    background-color: var(--main-primary-color);
+}
+/* tests for dark mode scheme */
+/* audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-seek-back-button,
+audio::-webkit-media-controls-seek-forward-button,
+audio::-webkit-media-controls-fullscreen-button,
+audio::-webkit-media-controls-rewind-button,
+audio::-webkit-media-controls-return-to-realtime-button,
+audio::-webkit-media-controls-toggle-closed-captions-button
+{
+    background-color: red;
+    border-radius: 50px;
+}
+audio::-webkit-media-controls-timeline
+{
+    background-color: green;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+audio::-webkit-media-controls-mute-button
+{
+    background-color: green;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display
+{
+    color: white;
+} */
 
 
 #MainContainer
@@ -39,21 +107,29 @@ body
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: black;
     width: 100%;
     height: 100%;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    /* text-shadow: var(--shadow-text-color) 0 0 3px; */
 }
 
 #NavArea
 {
-    background-color: red;
+    display: flex;
+    justify-content: center;
+    background-color: var(--main-primary-color);
     width: 100%;
     height: 3rem;
+}
+#colorSchemeButton
+{
+    width:3rem;
 }
 
 #GameArea
 {
-    background-color: green;
+    /* background-color: green; */
     width: 100%;
     height: 100%;
     display: flex;

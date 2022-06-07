@@ -1,5 +1,20 @@
 /* jshint esversion: 11 */
 
+function ToggleColorScheme(e)
+{
+    const icon = document.querySelector("#colorSchemeButtonIcon");
+    if (document.body.classList.contains("dark"))
+    {
+        document.body.classList.remove("dark");
+        icon.textContent = "dark_mode";
+    }
+    else
+    {
+        document.body.classList.add("dark");
+        icon.textContent = "light_mode";
+    }
+}
+
 /**
  * 
  * @enum {string}
@@ -123,6 +138,7 @@ function ShuffleArray(array)
 (() => {
     console.log("Game ready.");
     console.log(`After load area ${document.querySelector("#GameArea")}`);
+    document.querySelector("#colorSchemeButton").addEventListener("click", ToggleColorScheme);
 
     // let gameSelector = CreateGameElement("GameSelector");
     // let gameSelectorQuizButton = CreateGameElement("GameSelectorQuizButton", GAME_ELEMENT_TYPE.BUTTON, gameSelector);
