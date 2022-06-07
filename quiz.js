@@ -94,7 +94,7 @@ Quiz.questions =
     },
     {
         type: Quiz.QTYPE.TEXT,
-        message: "Which infinity stone gave Captain Marverl her powers?",
+        message: "Which infinity stone gave Captain Marvel her powers?",
         audio: "",
         options:
         [
@@ -150,6 +150,22 @@ Quiz.questions =
             "Captain America: Civil War",
             "Civil War",
             "Captain America Civil War"
+        ]
+    },
+    {
+        type: Quiz.QTYPE.AUDIO,
+        message: "Which character does the following musical sting represent?",
+        audio: "./audio/quiz_audio_1.mp3",
+        options:
+        [
+            "Spiderman",
+            "Iron Man",
+            "Thor",
+            "Captain America"
+        ],
+        answers:
+        [
+            "Spiderman",
         ]
     },
     
@@ -257,15 +273,19 @@ Quiz.Play = ()=>
  */
 Quiz.SetQuestion = (index)=>
 {
-    let question = Quiz.questions[index];
+    const question = Quiz.questions[index];
     Quiz.currentQuestion = question;
     Quiz.ElementMessage.textContent = document.createTextNode(question.message).textContent;
+    if (question.type == Quiz.QTYPE.AUDIO)
+    {
+        const audio = new Audio(question.audio);
+        audio.controls = true;
+        Quiz.ElementMessage.appendChild(audio);
+    }
     for (let i = 0; i < question.options.length; i++) {
         const button = Quiz.ElementButtons[i];
         button.textContent = question.options[i];
         EnableGameElement(button);
-        // Resetting class to remove styles.
-        // Could be better to remove style classes instead of resetting.
         button.classList.remove("Fail");
         button.classList.remove("Success");
     }
