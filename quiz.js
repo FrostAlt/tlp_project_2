@@ -38,6 +38,8 @@ Quiz.ElementButtons = [null,null,null,null];
  */
 Quiz.ElementNextButton = null;
 
+Quiz.CorrectQuestions = 0;
+
 /**
  * @enum {number}
  */
@@ -53,22 +55,6 @@ Quiz.QTYPE =
 Quiz.questions =
 [
     // Snippet prefix: quiz_question, question
-    {
-        type: Quiz.QTYPE.TEXT,
-        message: "Test message for test question 1 for test setup.",
-        audio: "",
-        options:
-        [
-            "Option 1",
-            "Option 2",
-            "Option 3",
-            "Option 4"
-        ],
-        answers:
-        [
-            "Option 2",
-        ]
-    },
     {
         type: Quiz.QTYPE.TEXT,
         message: "What is Captain America's real name?",
@@ -188,11 +174,17 @@ Quiz.IsAnswerCorrect = (answer)=>
     return false;
 };
 
+/**
+ * 
+ * @param {Object} e 
+ * @param {HTMLElement} e.target
+ */
 Quiz.OptionClickCallback = (e)=>
 {
     if (Quiz.IsAnswerCorrect(e.target.textContent))
     {
         e.target.classList.add("Success");
+        Quiz.CorrectQuestions++;
     }
     else
     {
@@ -202,6 +194,27 @@ Quiz.OptionClickCallback = (e)=>
         DisableGameElement(btn);
     });
     EnableGameElement(Quiz.ElementNextButton);
+};
+
+Quiz.NextClickCallback = (e)=>
+{
+    console.log(Quiz.currentQuestionIndex, Quiz.questions.length);
+    if (Quiz.currentQuestionIndex >= Quiz.questions.length-1)
+    {
+        // End of questions. Show stats.
+        // This is a test, replace with element set up.
+        const testStats = CreateGameElement("");
+        const stat = (Quiz.CorrectQuestions / Quiz.questions.length) * 100;
+        testStats.textContent = `${Quiz.CorrectQuestions} / ${Quiz.questions.length}\n${stat}%`;
+        ClearGameArea();
+        ShowGameElement(testStats);
+    }
+    else
+    {
+        // Better to create Quiz.NextQuestion()?
+        Quiz.currentQuestionIndex++;
+        Quiz.SetQuestion(Quiz.currentQuestionIndex);
+    }
 };
 
 /**
@@ -219,14 +232,21 @@ Quiz.Setup = ()=>
     }
     Quiz.ElementNextButton = CreateGameElement("QuizNextButton", GAME_ELEMENT_TYPE.BUTTON, Quiz.ElementArea);
     Quiz.ElementNextButton.textContent = "Next";
+    AddElementClickCallback(Quiz.ElementNextButton, Quiz.NextClickCallback);
     DisableGameElement(Quiz.ElementNextButton);
 };
 
 Quiz.Play = ()=>
 {
+    Quiz.CorrectQuestions = 0;
     ShuffleArray(Quiz.questions);
+    // Is this better done in Quiz.SetQuestion?
+    for (const question of Quiz.questions) {
+        ShuffleArray(question.options);
+    }
     Quiz.currentQuestionIndex = 0;
     Quiz.SetQuestion(Quiz.currentQuestionIndex);
+    Quiz.ElementNextButton.textContent = "Next";
     ShowGameElement(Quiz.ElementArea);
 };
 
@@ -249,6 +269,12 @@ Quiz.SetQuestion = (index)=>
         button.classList.remove("Fail");
         button.classList.remove("Success");
     }
+    // If at end of questions we can let player know by changing next text.
+    if (index >= Quiz.questions.length-1)
+    {
+        Quiz.ElementNextButton.textContent = "Finish";
+    }
+    DisableGameElement(Quiz.ElementNextButton);
 };
 
 Quiz.TestSetup = ()=>
