@@ -20,7 +20,7 @@ Pairs.Symbols =
 
 Pairs.CreatePairBox = (id, parent, image)=>
 {
-    const box = CreateGameElement(`PairsBox${id}`, null, parent);
+    const box = CreateGameElement(`PairsBox${id}`, GAME_ELEMENT_TYPE.BUTTON_STATIC, parent);
     box.classList.add("PairsBox");
     const boxInner = CreateGameElement("", "PairsBoxInner", box);
     const boxFront = CreateGameElement("", "PairsBoxFront", boxInner);
@@ -47,10 +47,7 @@ Pairs.Setup = ()=>
         const pairsContainerRow = CreateGameElement("", "PairsContainerRow", Pairs.ElementArea);
         for (let col = 0; col < Pairs.COLUMNS; col++) {
             const id = `${row}-${col}`;
-            // const b = CreateGameElement(`PairsBox${id}`, GAME_ELEMENT_TYPE.BUTTON, pairsContainerRow);
             const b = Pairs.CreatePairBox(id, pairsContainerRow, symbols.pop());
-            // b.classList.add("PairsBox");
-            // b.textContent = id;
         }
     }
 };

@@ -23,6 +23,7 @@ const GAME_ELEMENT_TYPE =
 {
     DEFAULT: "",
     BUTTON: "GameElementButton",
+    BUTTON_STATIC: "GameElementButton static",
 };
 
 /**

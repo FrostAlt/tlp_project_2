@@ -18,14 +18,16 @@
     padding: 10px;
 }
 
+/* Box flip help at below */
+/* https://www.w3schools.com/howto/howto_css_flip_card.asp */
 .PairsBox
 {
     flex-grow: 1;
     aspect-ratio: 1/1;
 
-    background-color: transparent;
+    /* background-color: transparent; */
     perspective: 1000px;
-    border: 1px solid #f1f1f1;
+
 }
 .PairsBoxInner
 {
@@ -44,7 +46,7 @@
     /* transform: translateY(-50%); */
     /* padding-top: 10px; */
 }
-.PairsBox:hover .PairsBoxInner
+.PairsBox.flipped .PairsBoxInner
 {
     transform: rotateY(180deg);
 }
@@ -58,7 +60,7 @@
 }
 .PairsBoxFront
 {
-    background-color: #bbb;
+    /* background-color: var(--main-primary-color); */
     color: black;
 }
 .PairsBoxBack
