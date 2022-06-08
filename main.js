@@ -37,6 +37,26 @@ function GetGameArea()
 
 /**
  * 
+ * @param {string} tag Tag type for element.
+ * @param {string} id Unique ID of new element.
+ * @param {string} [cls=GAME_ELEMENT_TYPE.DEFAULT] Default class of new element.
+ * @param {HTMLElement} [parent] Optional parent to add to.
+ * @return {HTMLElement}
+ */
+function CreateElement(tag, id, cls, parent)
+{
+    const newElement = document.createElement(tag);
+    newElement.className = cls;
+    newElement.id = id;
+    if (parent !== undefined)
+    {
+        parent.appendChild(newElement);
+    }
+    return newElement;
+}
+
+/**
+ * 
  * @param {string} id Unique ID of new element.
  * @param {string} [cls=GAME_ELEMENT_TYPE.DEFAULT] Default class of new element.
  * @param {HTMLElement} [parent] Optional parent to add to.
@@ -44,14 +64,8 @@ function GetGameArea()
  */
 function CreateGameElement(id, cls, parent)
 {
-    const newElement = document.createElement("div");
-    newElement.className = cls ?? GAME_ELEMENT_TYPE.DEFAULT;
-    newElement.id = id;
-    if (parent !== undefined)
-    {
-        parent.appendChild(newElement);
-    }
-    return newElement;
+    // Possible for function to return generic?
+    return (/**@type{HTMLDivElement}*/(CreateElement("div", id ?? "", cls ?? GAME_ELEMENT_TYPE.DEFAULT, parent)));
 }
 
 /**
