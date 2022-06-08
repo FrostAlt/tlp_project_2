@@ -233,8 +233,8 @@ Quiz.ShowStats = ()=>
     // This is a test, replace with element set up.
     const testStats = CreateGameElement("QuizStats");
     testStats.textContent = "Quiz Complete!";
-    const statPercent = CreateGameElement("QuizStatsPercent","",testStats);
-    const statAnswered = CreateGameElement("QuizStatsAnswered","",testStats);
+    const statPercent = CreateGameElement("QuizStatsPercent",GAME_ELEMENT_TYPE.DEFAULT,testStats);
+    const statAnswered = CreateGameElement("QuizStatsAnswered",GAME_ELEMENT_TYPE.DEFAULT,testStats);
     const percent = Math.floor((Quiz.CorrectQuestions / Quiz.questions.length) * 100);
     statPercent.textContent = `${percent}%`;
     statAnswered.textContent = `${Quiz.CorrectQuestions} / ${Quiz.questions.length}`;
