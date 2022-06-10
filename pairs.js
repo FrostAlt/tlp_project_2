@@ -131,7 +131,9 @@ var x = window.matchMedia("(min-width: 992px)");
 Pairs.Play = ()=>
 {
     // Should this change based on difficulty?
-    const n = 8;
+    //const n = 8;
+    const counts = [4,5,6,7,8,9,10,11,12];
+    const n = counts[Math.floor(Math.random()*counts.length)];
     // Nearest even just for fun.
     const even = n % 2 == 0 ? n : n-1;
     // Clamp pairs just in case, avoid overflow.
