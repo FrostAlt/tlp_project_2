@@ -168,7 +168,54 @@ Quiz.questions =
             "Spiderman",
         ]
     },
-    
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "What is Captain America's shield made from?",
+        audio: "",
+        options:
+        [
+            "Vibranium",
+            "Virdanium",
+            "Virilium",
+            "Vitanium"
+        ],
+        answers:
+        [
+            "Vibranium",
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "Which character does Bradley Cooper voice in the MCU?",
+        audio: "",
+        options:
+        [
+            "Rocket Racoon",
+            "Groot",
+            "Korg",
+            "Howard the Duck"
+        ],
+        answers:
+        [
+            "Rocket Racoon",
+        ]
+    },
+    {
+        type: Quiz.QTYPE.AUDIO,
+        message: "Which character does the following musical sting represent?",
+        audio: "./audio/quiz_audio_2.mp3",
+        options:
+        [
+            "Captain Marvel",
+            "Captain America",
+            "Thor",
+            "Iron Man"
+        ],
+        answers:
+        [
+            "Captain Marvel",
+        ]
+    },
     
 ];
 
