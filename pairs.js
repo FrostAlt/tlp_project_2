@@ -2,11 +2,17 @@
 class Pairs
 {
 }
-Pairs.ROWS = 4;
-Pairs.COLUMNS = 4;
+/**
+ * Number of pairs the player must find.
+ * Should be an even number.
+ * @type {number}
+ */
+Pairs.TotalPairs = 8;
+Pairs.Rows = 4;
+Pairs.Columns = 4;
 Pairs.ElementArea = null;
 
-Pairs.Symbols =
+Pairs.SYMBOLS =
 [
     "spoke",
     "circle",
@@ -15,7 +21,11 @@ Pairs.Symbols =
     "brightness_7",
     "savings",
     "storefront",
-    "local_florist"
+    "local_florist",
+    "airware",
+    "outlet",
+    "pets",
+    "coronavirus"
 ];
 
 /**
@@ -96,8 +106,8 @@ Pairs.BoxClickCallback = (e)=>
 Pairs.Setup = ()=>
 {
     // Shuffle original array so we get random images regardless of square count
-    ShuffleArray(Pairs.Symbols);
-    let symbols = Pairs.Symbols.slice(0, Pairs.ROWS*2);
+    ShuffleArray(Pairs.SYMBOLS);
+    let symbols = Pairs.SYMBOLS.slice(0, Pairs.Rows*2);
     // Multiply image count
     symbols = symbols.concat(symbols);
     // Shuffle again to randomize appearance
@@ -106,9 +116,9 @@ Pairs.Setup = ()=>
     }
 
     Pairs.ElementArea = CreateGameElement("PairsContainer");
-    for (let row = 0; row < Pairs.ROWS; row++) {
+    for (let row = 0; row < Pairs.Rows; row++) {
         const pairsContainerRow = CreateGameElement("", "PairsContainerRow", Pairs.ElementArea);
-        for (let col = 0; col < Pairs.COLUMNS; col++) {
+        for (let col = 0; col < Pairs.Columns; col++) {
             const id = `${row}-${col}`;
             const b = Pairs.CreatePairBox(id, pairsContainerRow, symbols.pop());
             AddElementClickCallback(b, Pairs.BoxClickCallback);
@@ -116,7 +126,39 @@ Pairs.Setup = ()=>
     }
 };
 
+var x = window.matchMedia("(min-width: 992px)");
+
 Pairs.Play = ()=>
 {
+    // Should this change based on difficulty?
+    const n = 8;
+    // Nearest even just for fun.
+    const even = n % 2 == 0 ? n : n-1;
+    // Clamp pairs just in case, avoid overflow.
+    //                  No clamp func? Why??
+    Pairs.TotalPairs = Math.min(Math.max(4, even), 12);
+    const totalSquares = Pairs.TotalPairs * 2;
+    // Roughly how many cols/rows
+    const sqr = Math.sqrt(totalSquares);
+    if (x.matches)
+    {
+        Pairs.Rows = 4;
+        Pairs.Columns = Math.ceil(sqr*2)-4;
+    }
+    else
+    {
+        // Always 4 columns for mobile so we can calculate left over rows
+        Pairs.Rows = Math.ceil(sqr*2)-4;
+        Pairs.Columns = 4;
+    }
+
+    // Resetting stats
+    Pairs.PreviousFlipped = null;
+    Pairs.TotalPairFlips = 0;
+    Pairs.TotalMatchedFlips = 0;
+    Pairs.Setup();
+    // Consider unflipping boxes when switching from quiz
     ShowGameElement(Pairs.ElementArea);
 };
+
+
