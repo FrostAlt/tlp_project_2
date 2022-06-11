@@ -4,9 +4,10 @@
     display: flex;
     flex-direction: column;
     /* background-color: blue; */
-    justify-content: space-evenly;
+    justify-content: center;
     width: 100%;
-    aspect-ratio: 1/1;
+    height: 100%;
+    /* aspect-ratio: 1/1; */
     /* border: 5px solid red; */
 }
 .PairsContainerRow
@@ -75,15 +76,29 @@
 {
     #PairsContainer
     {
-        height: 40vw;
-        width: 40vw;
+        /* height: 400px; */
+        /* width: 400px; */
         /* aspect-ratio: 1/1; */
         /* width: 800px; */
         /* height: 800px; */
+        
+        justify-content: center;
+        gap: 2vw;
     }
     .PairsContainerRow
     {
-        gap: 25px;
+        /* gap: 25px; */
+        gap: 2vw;
+        padding: 0px;
+        
+        justify-content:center;
+    }
+    .PairsBox
+    {
+        width: 8vw;
+        /* height: 10vw; */
+        flex-grow: 0;
+        aspect-ratio: 1/1;
     }
     .PairsBoxInner .material-symbols-outlined
     {
