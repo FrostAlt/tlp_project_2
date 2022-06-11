@@ -81,10 +81,16 @@ Pairs.BoxClickCallback = (e)=>
         {
             // Matched flip
             Pairs.TotalMatchedFlips++;
+            const back = box.querySelector(".PairsBoxBack");
+            const backPrev = Pairs.PreviousFlipped.querySelector(".PairsBoxBack");
+            back.classList.add("flash");
+            backPrev.classList.add("flash");
             console.log("Matched flip!");
         }
         else
         {
+            // We cache this for the anonymous function because the field
+            // is set to null afterwards.
             const prevFlipped = Pairs.PreviousFlipped;
             setTimeout(()=>{
                 box.classList.remove("flipped");
@@ -107,10 +113,12 @@ Pairs.Setup = ()=>
 {
     // Shuffle original array so we get random images regardless of square count
     ShuffleArray(Pairs.SYMBOLS);
-    let symbols = Pairs.SYMBOLS.slice(0, Pairs.Rows*2);
+    console.log(`Shuffling Pairs.SYMBOLS with length ${Pairs.SYMBOLS.length}`);
+    let symbols = Pairs.SYMBOLS.slice(0, Pairs.TotalPairs);
     // Multiply image count
     symbols = symbols.concat(symbols);
     // Shuffle again to randomize appearance
+    // Doesn't have to be repeated but I get better results
     for (let i = 0; i < 6; i++) {
         ShuffleArray(symbols);
     }
@@ -126,7 +134,7 @@ Pairs.Setup = ()=>
     }
 };
 
-var x = window.matchMedia("(min-width: 992px)");
+const pairsMinWidthMatch = window.matchMedia("(min-width: 992px)");
 
 Pairs.Play = ()=>
 {
@@ -142,16 +150,18 @@ Pairs.Play = ()=>
     const totalSquares = Pairs.TotalPairs * 2;
     // Roughly how many cols/rows
     const sqr = Math.sqrt(totalSquares);
-    if (x.matches)
+    if (pairsMinWidthMatch.matches)
     {
+        // Larger screens like desktop
         Pairs.Rows = 4;
         Pairs.Columns = Math.ceil(sqr*2)-4;
     }
     else
     {
+        // Smaller screens like mobile
         // Always 4 columns for mobile so we can calculate left over rows
-        Pairs.Rows = Math.ceil(sqr*2)-4;
         Pairs.Columns = 4;
+        Pairs.Rows = Math.ceil(sqr*2)-4;
     }
 
     // Resetting stats

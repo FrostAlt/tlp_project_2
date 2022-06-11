@@ -1,4 +1,11 @@
 
+@keyframes flash
+{
+    0% { background-color:var(--main-primary-highlight-color); }
+    50% { background-color: #ffffffd0; }
+    100% { background-color: var(--main-primary-highlight-color); }
+}
+
 #PairsContainer
 {
     display: flex;
@@ -67,7 +74,28 @@
 .PairsBoxBack
 {
     background-color: var(--main-primary-highlight-color); /* previously #1e90ff dodgerblue */
+    
     transform: rotateY(180deg);
+
+    /* Used to stop cheating by selecting and dragging */
+    /* https://stackoverflow.com/a/4407335/15190248 */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+.flash
+{
+    /* background-color: red; */
+    /* animation: flash 4000ms linear 0 1 normal none; */
+    animation-name: flash;
+    animation-duration: 500ms;
+    animation-timing-function:ease-in-out;
+    animation-delay: 0.3s;
+    animation-iteration-count: 1;
 }
 
 
