@@ -6,6 +6,7 @@ body
     --main-bg-color: #EEEEEE;
     --main-text-color: #0E0E0E;
     --main-primary-color: #1D57AE;
+    --main-primary-highlight-color: #3f84eb;
     --shadow-text-color: #181818; /* unused */
 
     --button-bg-color: var(--main-primary-color);

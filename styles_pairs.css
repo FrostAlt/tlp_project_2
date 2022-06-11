@@ -61,13 +61,12 @@
 }
 .PairsBoxFront
 {
+    /* Not needed because these are a game button class */
     /* background-color: var(--main-primary-color); */
-    color: black;
 }
 .PairsBoxBack
 {
-    background-color: dodgerblue;
-    color: white;
+    background-color: var(--main-primary-highlight-color); /* previously #1e90ff dodgerblue */
     transform: rotateY(180deg);
 }
 
