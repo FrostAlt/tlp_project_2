@@ -1,19 +1,52 @@
 /* jshint esversion: 11 */
 
-function ToggleColorScheme(e)
+const DIFFICULTY =
 {
-    const icon = document.querySelector("#colorSchemeButtonIcon");
-    if (document.body.classList.contains("dark"))
+    NORMAL: 1,
+    HARD: 2
+};
+let Difficulty = DIFFICULTY.NORMAL;
+
+/**
+ * 
+ * @param {Object} e 
+ * @param {HTMLElement} e.currentTarget
+ * @param {"on"|"off"} state
+ */
+function ToggleColorScheme(e, state)
+{
+    // const icon = document.querySelector("#colorSchemeButtonIcon");
+    // if (document.body.classList.contains("dark"))
+    if (state === "off")
     {
         document.body.classList.remove("dark");
-        icon.textContent = "dark_mode";
+        // icon.textContent = "dark_mode";
     }
     else
     {
         document.body.classList.add("dark");
-        icon.textContent = "light_mode";
+        // icon.textContent = "light_mode";
     }
 }
+
+/**
+ * 
+ * @param {Object} e 
+ * @param {HTMLElement} e.currentTarget
+ * @param {"on"|"off"} state
+ */
+ function ToggleDifficulty(e, state)
+ {
+    // const icon = document.querySelector("#colorSchemeButtonIcon");
+    if (state === "off")
+    {
+        Difficulty = DIFFICULTY.NORMAL;
+    }
+    else
+    {
+        Difficulty = DIFFICULTY.HARD;
+    }
+ }
 
 /**
  * 
@@ -100,6 +133,14 @@ function EnableGameElement(element)
     }
 }
 
+
+
+/**
+ * @callback GameElementCallback
+ * @param {MouseEvent & { target: HTMLElement }} e
+ * @param {"on"|"off"|undefined} toggleState
+ */
+
  /**
   * 
   * @param {HTMLElement} element 
@@ -107,12 +148,52 @@ function EnableGameElement(element)
   */
 function AddElementClickCallback(element, callback)
 {
-    element.addEventListener("click", (e)=>{
+    
+    element.addEventListener("click",
+        // No idea how to document this, google doesn't help
+        (e)=>{
         if (!element.classList.contains("disabled"))
         {
-            callback(e);
+            let state;
+            //@ts-ignore
+            if (e.currentTarget.classList.contains("icon-flip"))
+            {
+                //@ts-ignore
+                state = IconFlipHandler(e);
+            }
+            callback(e, state);
         }
     });
+}
+
+/**
+ * 
+ * @param {Object} e 
+ * @param {HTMLElement} e.currentTarget
+ * @returns {"on"|"off"}
+ */
+function IconFlipHandler(e)
+{
+    const icon = e.currentTarget;
+    if (icon.classList.contains("icon-flip-on"))
+    {
+        console.log("Turning off icon flip button");
+        icon.classList.replace("icon-flip-on","icon-flip-off");
+        return "off";
+    }
+    else
+    {
+        console.log("Turning on icon flip button");
+        if (icon.classList.contains("icon-flip-off"))
+        {
+            icon.classList.replace("icon-flip-off","icon-flip-on");
+        }
+        else
+        {
+            icon.classList.add("icon-flip-on");
+        }
+        return "on";
+    }
 }
 
 
@@ -153,7 +234,10 @@ function ShuffleArray(array)
 (() => {
     console.log("Game ready.");
     console.log(`After load area ${document.querySelector("#GameArea")}`);
-    document.querySelector("#colorSchemeButton").addEventListener("click", ToggleColorScheme);
+    //@ts-ignore
+    // document.querySelector("#colorSchemeButton").addEventListener("click", ToggleColorScheme);
+    AddElementClickCallback(document.querySelector("#colorSchemeButton"), ToggleColorScheme);
+    AddElementClickCallback(document.querySelector("#difficultyButton"), ToggleDifficulty);
     const playPairs = ()=>{
         ClearGameArea();
         Pairs.Play();

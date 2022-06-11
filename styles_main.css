@@ -37,7 +37,7 @@ body.dark
 
 .GameElementButton
 {
-    width: auto;
+    width:auto;
     height: auto;
     display:flex;
     justify-content: center;
@@ -87,6 +87,10 @@ body.dark
     background-color: var(--button-bg-color-disabled);
     color: var(--button-text-color-disabled);
 }
+.GameElementButton>.material-symbols-outlined
+{
+    color: var(--button-text-color);
+}
 
 audio::-webkit-media-controls-panel
 {
@@ -123,6 +127,8 @@ audio::-webkit-media-controls-time-remaining-display
 } */
 
 
+/* Main display stuff */
+
 #MainContainer
 {
     display: flex;
@@ -146,15 +152,98 @@ audio::-webkit-media-controls-time-remaining-display
     width: 100%;
     height: 4rem;
 }
+.nav-button
+{
+    aspect-ratio: 1 / 1;
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center; */
+}
 .NavButtonLabel
 {
     display:none;
 }
-.nav-button
+.nav-button .material-symbols-outlined
 {
-    aspect-ratio: 1 / 1;
+    font-size: 2rem;
+}
+.nav-divider
+{
+    border-left: 2px solid var(--button-text-color);
+    /* border-right: 1px solid var(--main-text-color); */
 }
 
+@keyframes icon-switch-out-clockwise {
+    0% { transform: rotate(0deg); opacity: 1; }
+    70% { opacity: 0; }
+    100% { transform: rotate(360deg); opacity: 0; }
+}
+@keyframes icon-switch-in-clockwise {
+    0% { transform: rotate(0deg); opacity: 0; }
+    30% { opacity: 0; }
+    100% { transform: rotate(360deg); opacity: 1; }
+}
+@keyframes icon-switch-out-counterclock {
+    0% { transform: rotate(360deg); opacity: 1; }
+    70% { opacity: 0; }
+    100% { transform: rotate(0deg); opacity: 0; }
+}
+@keyframes icon-switch-in-counterclock {
+    0% { transform: rotate(360deg); opacity: 0; }
+    30% { opacity: 0; }
+    100% { transform: rotate(0deg); opacity: 1; }
+}
+
+.icon-flip>div{
+    /* position: relative; */
+    /* width:fit-content;
+    height:fit-content;
+    width: 50%;
+    height:50%; */
+    /* position:relative; */
+    width:2rem;
+    height:2rem;
+    position: relative;
+    /* width:100%;
+    height:100%; */
+}
+/* Shared values */
+.icon-flip-initial,.icon-flip-alt
+{
+    position: absolute;
+    left:0;
+    top:0;
+    animation-fill-mode: both;
+    animation-duration: 600ms;
+    animation-delay: 0ms;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+}
+.icon-flip-initial
+{
+    opacity: 1;
+}
+.icon-flip-alt
+{
+    opacity: 0;
+}
+
+.icon-flip-on .icon-flip-initial
+{
+    animation-name: icon-switch-out-clockwise;
+}
+.icon-flip-on .icon-flip-alt
+{
+    animation-name: icon-switch-in-clockwise;
+}
+.icon-flip-off .icon-flip-initial
+{
+    animation-name: icon-switch-in-counterclock;
+}
+.icon-flip-off .icon-flip-alt
+{
+    animation-name: icon-switch-out-counterclock;
+}
 
 #StartButtonContainer
 {
@@ -176,6 +265,8 @@ audio::-webkit-media-controls-time-remaining-display
     padding: 15px;
     aspect-ratio: 1/1;
 }
+
+/* Game classes */
 
 #GameArea
 {
@@ -215,17 +306,19 @@ audio::-webkit-media-controls-time-remaining-display
 {
     .NavButtonLabel
     {
+        padding-left: 0.3rem;
+        padding-right: 0.25rem;
         display:block;
     }
     #NavArea
     {
-        gap:20px;
+        gap:30px;
     }
     /* Aspect ratio doesn't work here for some reason, hardcoded */
-    #colorSchemeButton
+    /* #colorSchemeButton
     {
         width: 4rem;
-    }
+    } */
 
     #StartButtonContainer
     {

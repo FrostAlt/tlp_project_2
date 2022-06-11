@@ -21,23 +21,49 @@
 <body>
     <div id="MainContainer">
         <div id="NavArea">
+
             <div id="playPairsButton" class="GameElementButton static nav-button" title="Play pairs game.">
                 <span id="playQuizButtonIcon" class="material-symbols-outlined">
                     casino
                 </span>
                 <span class="NavButtonLabel">Play Pairs</span>
             </div>
+
+            <!-- <div class="nav-divider"></div> -->
+
             <div id="playQuizButton" class="GameElementButton static nav-button" title="Play quiz game.">
                 <span id="playQuizButtonIcon" class="material-symbols-outlined">
                     quiz
                 </span>
                 <span class="NavButtonLabel">Play Quiz</span>
             </div>
-            <div id="colorSchemeButton" class="GameElementButton static nav-button" title="Toggle colour scheme.">
-                <span id="colorSchemeButtonIcon" class="material-symbols-outlined">
+
+            <div class="nav-divider"></div>
+
+            <div id="difficultyButton" class="GameElementButton static nav-button icon-flip" title="Toggle colour scheme.">
+                <div>
+                <span id="" class="icon-flip-initial material-symbols-outlined">
+                    child_care
+                </span>
+                <span id="" class="icon-flip-alt material-symbols-outlined">
+                    sentiment_extremely_dissatisfied
+                </span>
+                </div>
+                <span class="NavButtonLabel">Difficulty</span>
+            </div>
+
+            <div id="colorSchemeButton" class="GameElementButton static nav-button icon-flip" title="Toggle colour scheme.">
+                <div>
+                <span id="" class="icon-flip-initial material-symbols-outlined">
+                    light_mode
+                </span>
+                <span id="" class="icon-flip-alt material-symbols-outlined">
                     dark_mode
                 </span>
+                </div>
+                <span class="NavButtonLabel">Colour Scheme</span>
             </div>
+
         </div>
         <!-- Main game area, only starts with bigger nav buttons -->
         <!-- Actual game content is generated with JS -->
