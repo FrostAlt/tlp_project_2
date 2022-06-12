@@ -28,6 +28,10 @@ Quiz.ElementArea = null;
 /**
  * @type {HTMLDivElement}
  */
+Quiz.ElementQuestionCounter = null;
+/**
+ * @type {HTMLDivElement}
+ */
 Quiz.ElementMessage = null;
 /**
  * @type {HTMLDivElement[]}
@@ -518,7 +522,7 @@ Quiz.ShowStats = ()=>
     const statAnswered = CreateGameElement("QuizStatsAnswered",GAME_ELEMENT_TYPE.DEFAULT,testStats);
     const percent = Math.floor((Quiz.CorrectQuestions / Quiz.questions.length) * 100);
     statPercent.textContent = `${percent}%`;
-    statAnswered.textContent = `${Quiz.CorrectQuestions} / ${Quiz.questions.length}`;
+    statAnswered.textContent = `${Quiz.CorrectQuestions} / 10`;
     ClearGameArea();
     ShowGameElement(testStats);
 };
@@ -530,6 +534,7 @@ Quiz.ShowStats = ()=>
 Quiz.Setup = ()=>
 {
     Quiz.ElementArea = CreateGameElement("QuizContainer");
+    Quiz.ElementQuestionCounter = CreateGameElement("QuizQuestionCounter", GAME_ELEMENT_TYPE.DEFAULT, Quiz.ElementArea);
     Quiz.ElementMessage = CreateGameElement("QuizMessage", GAME_ELEMENT_TYPE.DEFAULT, Quiz.ElementArea);
     for (let i = 0; i < 4; i++) {
         Quiz.ElementButtons[i] = CreateGameElement(`QuizButton${i}`, GAME_ELEMENT_TYPE.BUTTON, Quiz.ElementArea);
@@ -565,6 +570,7 @@ Quiz.SetQuestion = (index)=>
 {
     const question = Quiz.questions[index];
     Quiz.currentQuestion = question;
+    Quiz.ElementQuestionCounter.textContent = `Question ${Quiz.currentQuestionIndex}/10`;
     Quiz.ElementMessage.textContent = document.createTextNode(question.message).textContent;
     if (question.type == Quiz.QTYPE.AUDIO)
     {
