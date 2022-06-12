@@ -512,6 +512,23 @@ Quiz.NextClickCallback = (e)=>
     }
 };
 
+Quiz.SubmitAnswerClickCallback = (e)=>
+{
+    const input = (/**@type {HTMLInputElement}*/(Quiz.ElementArea.querySelector("#QuizInput")));
+    const answer = input.value;
+    if (Quiz.IsAnswerCorrect(answer))
+    {
+        input.style.backgroundColor = "var(--quiz-correct-color)";
+        Quiz.CorrectQuestions++;
+    }
+    else
+    {
+        input.style.backgroundColor = "var(--quiz-incorrect-color)";
+    }
+    DisableGameElement(Quiz.ElementArea.querySelector("#QuizInputSubmit"));
+    EnableGameElement(Quiz.ElementNextButton);
+};
+
 Quiz.ShowStats = ()=>
 {
     // End of questions. Show stats.
@@ -536,10 +553,21 @@ Quiz.Setup = ()=>
     Quiz.ElementArea = CreateGameElement("QuizContainer");
     Quiz.ElementQuestionCounter = CreateGameElement("QuizQuestionCounter", GAME_ELEMENT_TYPE.DEFAULT, Quiz.ElementArea);
     Quiz.ElementMessage = CreateGameElement("QuizMessage", GAME_ELEMENT_TYPE.DEFAULT, Quiz.ElementArea);
-    for (let i = 0; i < 4; i++) {
-        Quiz.ElementButtons[i] = CreateGameElement(`QuizButton${i}`, GAME_ELEMENT_TYPE.BUTTON, Quiz.ElementArea);
-        Quiz.ElementButtons[i].classList.add("QuizOption");
-        AddElementClickCallback(Quiz.ElementButtons[i], Quiz.OptionClickCallback);
+    if (Difficulty === DIFFICULTY.HARD)
+    {
+        const inputArea = CreateGameElement("QuizInputContainer", GAME_ELEMENT_TYPE.DEFAULT, Quiz.ElementArea);
+        CreateElement("input", "QuizInput", "", inputArea);
+        const btn = CreateGameElement("QuizInputSubmit", GAME_ELEMENT_TYPE.BUTTON, inputArea);
+        btn.textContent = "Submit";
+        AddElementClickCallback(btn, Quiz.SubmitAnswerClickCallback);
+    }
+    else
+    {
+        for (let i = 0; i < 4; i++) {
+            Quiz.ElementButtons[i] = CreateGameElement(`QuizButton${i}`, GAME_ELEMENT_TYPE.BUTTON, Quiz.ElementArea);
+            Quiz.ElementButtons[i].classList.add("QuizOption");
+            AddElementClickCallback(Quiz.ElementButtons[i], Quiz.OptionClickCallback);
+        }
     }
     Quiz.ElementNextButton = CreateGameElement("QuizNextButton", GAME_ELEMENT_TYPE.BUTTON, Quiz.ElementArea);
     Quiz.ElementNextButton.textContent = "Next";
@@ -549,6 +577,8 @@ Quiz.Setup = ()=>
 
 Quiz.Play = ()=>
 {
+    // Temporary to get hard difficulty setup
+    Quiz.Setup();
     Quiz.CorrectQuestions = 0;
     ShuffleArray(Quiz.questions);
     // Is this better done in Quiz.SetQuestion?
@@ -578,12 +608,22 @@ Quiz.SetQuestion = (index)=>
         audio.controls = true;
         Quiz.ElementMessage.appendChild(audio);
     }
-    for (let i = 0; i < question.options.length; i++) {
-        const button = Quiz.ElementButtons[i];
-        button.textContent = question.options[i];
-        EnableGameElement(button);
-        button.classList.remove("Fail");
-        button.classList.remove("Success");
+    if (Difficulty === DIFFICULTY.HARD)
+    {
+        const input = (/**@type {HTMLInputElement}*/(Quiz.ElementArea.querySelector("#QuizInput")));
+        input.value = "";
+        input.style.backgroundColor = "initial";
+        EnableGameElement(Quiz.ElementArea.querySelector("#QuizInputSubmit"));
+    }
+    else
+    {
+        for (let i = 0; i < question.options.length; i++) {
+            const button = Quiz.ElementButtons[i];
+            button.textContent = question.options[i];
+            EnableGameElement(button);
+            button.classList.remove("Fail");
+            button.classList.remove("Success");
+        }
     }
     // If at end of questions we can let player know by changing next text.
     if (index >= Quiz.questions.length-1)

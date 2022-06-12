@@ -65,6 +65,22 @@ body.dark
     height: 3rem;
 }
 
+#QuizInputContainer
+{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+#QuizInputContainer>#QuizInputSubmit
+{
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size:medium;
+}
+/* Win state */
+
 #QuizStats
 {
     background-color: var(--main-primary-color);

@@ -46,6 +46,7 @@ function ToggleColorScheme(e, state)
     {
         Difficulty = DIFFICULTY.HARD;
     }
+    console.log(`Difficulty: ${Difficulty}`);
  }
 
 /**
