@@ -516,6 +516,11 @@ Quiz.SubmitAnswerClickCallback = (e)=>
 {
     const input = (/**@type {HTMLInputElement}*/(Quiz.ElementArea.querySelector("#QuizInput")));
     const answer = input.value;
+    if (answer.trim() === "")
+    {
+        // Don't do anything on empty input
+        return;
+    }
     if (Quiz.IsAnswerCorrect(answer))
     {
         input.style.backgroundColor = "var(--quiz-correct-color)";
