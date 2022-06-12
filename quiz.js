@@ -153,22 +153,6 @@ Quiz.questions =
         ]
     },
     {
-        type: Quiz.QTYPE.AUDIO,
-        message: "Which character does the following musical sting represent?",
-        audio: "./audio/quiz_audio_1.mp3",
-        options:
-        [
-            "Spiderman",
-            "Iron Man",
-            "Thor",
-            "Captain America"
-        ],
-        answers:
-        [
-            "Spiderman",
-        ]
-    },
-    {
         type: Quiz.QTYPE.TEXT,
         message: "What is Captain America's shield made from?",
         audio: "",
@@ -198,6 +182,199 @@ Quiz.questions =
         answers:
         [
             "Rocket Racoon",
+            "Rocket"
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "Which Hollywood A-lister made a cameo in Thor: Ragnarok playing Loki in an Asgardian play?",
+        audio: "",
+        options:
+        [
+            "Matt Damon",
+            "Leonardo Dicaprio",
+            "Johnny Depp",
+            "Brad Pitt"
+        ],
+        answers:
+        [
+            "Matt Damon",
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "In which film did Thanos make his first appearance?",
+        audio: "",
+        options:
+        [
+            "The Avengers",
+            "Iron Man 2",
+            "Guardians of the Galaxy",
+            "Thor 2"
+        ],
+        answers:
+        [
+            "The Avengers",
+            "Avengers"
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "What country does Wanda Maximoff come from?",
+        audio: "",
+        options:
+        [
+            "Sokovia",
+            "Slovinia",
+            "Nokovia",
+            "Varkonia"
+        ],
+        answers:
+        [
+            "Sokovia",
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "Which character is known for the phrase \"I can do this all day\"?",
+        audio: "",
+        options:
+        [
+            "Steve Rogers",
+            "Tony Stark",
+            "Thor",
+            "Peter Quill"
+        ],
+        answers:
+        [
+            "Steve Rogers",
+            "Steve Grant Rogers",
+            "Steven Rogers",
+            "Steven Grant Rogers",
+            "Captain America",
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "Which villian says the quote \"I am burdened with glorious purpose\"?",
+        audio: "",
+        options:
+        [
+            "Loki",
+            "Thanos",
+            "Ultron",
+            "Killmonger"
+        ],
+        answers:
+        [
+            "Loki",
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "In which movie was the iconic phrase \"Avengers assemble\" first heard?",
+        audio: "",
+        options:
+        [
+            "Avengers: End Game",
+            "Avengers: Infinity War",
+            "Avengers: Age of Ultron",
+            "The Avengers"
+        ],
+        answers:
+        [
+            "Avengers: End Game",
+            "End Game",
+            "Avengers End Game",
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "How many movies does Tony Stark appear in?",
+        audio: "",
+        options:
+        [
+            "10",
+            "9",
+            "8",
+            "11"
+        ],
+        answers:
+        [
+            "10",
+            "Ten"
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "Who provides the voice of Baby Groot?",
+        audio: "",
+        options:
+        [
+            "Vin Diesal",
+            "Matt Damon",
+            "Dwayne Johnson",
+            "Idris Elba"
+        ],
+        answers:
+        [
+            "Vin Diesal",
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "What is the only Marvel film to not have a post-credit scene?",
+        audio: "",
+        options:
+        [
+            "Avengers: End Game",
+            "Avengers: Infinity War",
+            "Captain Marvel",
+            "Thor: Ragnarok"
+        ],
+        answers:
+        [
+            "Avengers: End Game",
+            "End Game",
+            "Avengers End Game",
+        ]
+    },
+    {
+        type: Quiz.QTYPE.TEXT,
+        message: "What is the name of the microscopic universe Ant-Man travels to when he goes sub-atomic?",
+        audio: "",
+        options:
+        [
+            "Quantum Realm",
+            "Nano Realm",
+            "Subatomic Realm",
+            "Diminutive Realm"
+        ],
+        answers:
+        [
+            "Quantum Realm",
+            "Quantum",
+            "Quantum Universe",
+        ]
+    },
+    
+    // Audio
+    {
+        type: Quiz.QTYPE.AUDIO,
+        message: "Which character does the following musical sting represent?",
+        audio: "./audio/quiz_audio_1.mp3",
+        options:
+        [
+            "Spider-Man",
+            "Iron Man",
+            "Thor",
+            "Captain America"
+        ],
+        answers:
+        [
+            "Spider-Man",
+            "Spiderman",
+            "Spider Man"
         ]
     },
     {
@@ -216,7 +393,63 @@ Quiz.questions =
             "Captain Marvel",
         ]
     },
-    
+    {
+        type: Quiz.QTYPE.AUDIO,
+        message: "Which character does the following musical sting represent?",
+        audio: "./audio/quiz_audio_3.mp3",
+        options:
+        [
+            "Ant Man",
+            "Shang-Chi",
+            "Thor",
+            "Spider-Man"
+        ],
+        answers:
+        [
+            "Ant Man",
+            "Antman",
+            "Ant-man",
+        ]
+    },
+    {
+        type: Quiz.QTYPE.AUDIO,
+        message: "Which character does the following musical sting represent?",
+        audio: "./audio/quiz_audio_4.mp3",
+        options:
+        [
+            "Captain America",
+            "Thor",
+            "Hulk",
+            "Black Panther"
+        ],
+        answers:
+        [
+            "Captain America",
+            "Steve Rogers",
+            "Steve Grant Rogers",
+            "Steven Rogers",
+            "Steven Grant Rogers",
+        ]
+    },
+    {
+        type: Quiz.QTYPE.AUDIO,
+        message: "Which character does the following musical sting represent?",
+        audio: "./audio/quiz_audio_5.mp3",
+        options:
+        [
+            "Iron Man",
+            "Thor",
+            "Hulk",
+            "Captain America"
+        ],
+        answers:
+        [
+            "Iron Man",
+            "IronMan",
+            "Iron-Man",
+            "Tony Stark",
+        ]
+    },
 ];
 
 /**
@@ -262,7 +495,8 @@ Quiz.OptionClickCallback = (e)=>
 Quiz.NextClickCallback = (e)=>
 {
     console.log(Quiz.currentQuestionIndex, Quiz.questions.length);
-    if (Quiz.currentQuestionIndex >= Quiz.questions.length-1)
+    // if (Quiz.currentQuestionIndex >= Quiz.questions.length-1)
+    if (Quiz.currentQuestionIndex >= 10)
     {
         Quiz.ShowStats();
     }
