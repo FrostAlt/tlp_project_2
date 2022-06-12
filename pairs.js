@@ -10,6 +10,9 @@ class Pairs
 Pairs.TotalPairs = 8;
 Pairs.Rows = 4;
 Pairs.Columns = 4;
+/**
+ * @type {HTMLDivElement}
+ */
 Pairs.ElementArea = null;
 
 Pairs.SYMBOLS =
@@ -32,9 +35,14 @@ Pairs.SYMBOLS =
  * @type {PairBox}
  */
 Pairs.PreviousFlipped = null;
+/**
+ * @type {number}
+ */
+Pairs.PreviousChosenPairsCount = null;
 
 Pairs.TotalPairFlips = 0;
 Pairs.TotalMatchedFlips = 0;
+
 
 /**
  * @typedef {HTMLDivElement & {image: String}} PairBox
@@ -59,6 +67,25 @@ Pairs.CreatePairBox = (id, parent, image)=>
     const img = CreateElement("span",null,"material-symbols-outlined",boxBack);
     img.textContent = image;
     return box;
+};
+
+Pairs.Win = ()=>
+{
+    Pairs.ElementArea.querySelectorAll(".PairsBoxBack").forEach(element => {
+        element.classList.replace("flash","flash-twice");
+    });
+    const testScore1 = CreateElement("div","","PairsScoreContainerBack",Pairs.ElementArea);
+    const testScore2 = CreateElement("div","","PairsScoreContainer",Pairs.ElementArea);
+    const extraFlips = Pairs.TotalPairFlips - Pairs.TotalPairs;
+    const score = extraFlips / (Pairs.TotalPairs * 2);
+    let message;
+    if (score >= 1) { message = "POOR ATTEMPT"; }
+    else if (score >= 0.75) { message = "NOT GOOD"; }
+    else if (score >= 0.50) { message = "AVERAGE"; }
+    else if (score >= 0.25) { message = "GOOD"; }
+    else if (score > 0.00) { message = "EXCELLENT"; }
+    else { message = "PERFECT!\nNO WRONG MOVES"; }
+    testScore2.textContent = `FINISHED IN\n${Pairs.TotalPairFlips} MOVES\n______________\n\n${message}`;
 };
 
 /**
@@ -86,6 +113,11 @@ Pairs.BoxClickCallback = (e)=>
             back.classList.add("flash");
             backPrev.classList.add("flash");
             console.log("Matched flip!");
+            // Win condition
+            if (Pairs.TotalMatchedFlips >= Pairs.TotalPairs)
+            {
+                Pairs.Win();
+            }
         }
         else
         {
@@ -140,10 +172,20 @@ Pairs.Play = ()=>
 {
     // Should this change based on difficulty?
     //const n = 8;
-    const counts = [4,5,6,7,8,9,10,11,12];
+    let counts = (Difficulty === DIFFICULTY.HARD ? [8,10,12] : [4,6]);
+    // https://stackoverflow.com/a/3954451/15190248
+    const index = counts.indexOf(Pairs.PreviousChosenPairsCount);
+    console.log(counts);
+    if (index !== -1) {
+        console.log(`Removing ${index} ${counts[index]}`);
+        counts.splice(index, 1);
+    }
+    console.log(counts);
     const n = counts[Math.floor(Math.random()*counts.length)];
+    console.log(`Chose ${n}`);
     // Nearest even just for fun.
     const even = n % 2 == 0 ? n : n-1;
+    Pairs.PreviousChosenPairsCount = n;
     // Clamp pairs just in case, avoid overflow.
     //                  No clamp func? Why??
     Pairs.TotalPairs = Math.min(Math.max(4, even), 12);

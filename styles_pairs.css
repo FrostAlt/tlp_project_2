@@ -5,6 +5,30 @@
     50% { background-color: #ffffffd0; }
     100% { background-color: var(--main-primary-highlight-color); }
 }
+.flash
+{
+    animation-name: flash;
+    animation-duration: 500ms;
+    animation-timing-function:ease-in-out;
+    animation-delay: 0.3s;
+    animation-iteration-count: 1;
+}
+@keyframes flash-twice
+{
+    0% { background-color:var(--main-primary-highlight-color); }
+    25% { background-color: #ffffffd0; }
+    50% { background-color: var(--main-primary-highlight-color); }
+    75% { background-color: #ffffffd0; }
+    100% { background-color: var(--main-primary-highlight-color); }
+}
+.flash-twice
+{
+    animation-name: flash-twice;
+    animation-duration: 500ms;
+    animation-timing-function:ease-in-out;
+    animation-delay: 0.3s;
+    animation-iteration-count: 1;
+}
 
 #PairsContainer
 {
@@ -87,16 +111,56 @@
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
-.flash
-{
-    /* background-color: red; */
-    /* animation: flash 4000ms linear 0 1 normal none; */
-    animation-name: flash;
-    animation-duration: 500ms;
-    animation-timing-function:ease-in-out;
-    animation-delay: 0.3s;
-    animation-iteration-count: 1;
+
+/* Score circle */
+
+@keyframes pairs-container-grow {
+    /* 0% { width: 0%; }
+    100% { width: 100%; } */
+    0% { transform: scale(0); }
+    100% {transform: scale(1); }
 }
+.PairsScoreContainerBack,.PairsScoreContainer
+{
+    animation-name: pairs-container-grow;
+    animation-timing-function:ease;
+    animation-fill-mode: forwards;
+    overflow: hidden;
+    position: absolute;
+    align-self: center;
+}
+.PairsScoreContainerBack
+{
+    background-color: var(--main-bg-color);
+    border-radius: 50%;
+    transform: scale(0);
+    width: 200%;
+    /* height: 0%; */
+    aspect-ratio: 1/1;
+    animation-delay: 900ms;
+    animation-duration: 1300ms;
+}
+.PairsScoreContainer
+{
+    background-color: var(--main-primary-color);
+    border-radius: 50%;
+    transform: scale(0);
+    width: 80%;
+    aspect-ratio: 1/1;
+    animation-delay: 1300ms;
+    animation-duration: 1000ms;
+
+    display: flex;
+    flex-direction: column;
+    /* align-content: center; */
+    justify-content: center;
+    font-size: xx-large;
+    text-align: center;
+
+    /* Seems to be an easy way to allow \n */
+    white-space: pre-line;
+}
+
 
 
 @media (min-width: 992px)
@@ -132,5 +196,12 @@
         position:relative;
         font-size: 6vw;
         top: 15%;
+    }
+
+    .PairsScoreContainer
+    {
+        height: 30vw;
+        width: 30vw;
+        font-size: 2.25vw;
     }
 }
