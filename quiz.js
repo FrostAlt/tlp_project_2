@@ -542,7 +542,7 @@ Quiz.ShowStats = ()=>
     testStats.textContent = "Quiz Complete!";
     const statPercent = CreateGameElement("QuizStatsPercent",GAME_ELEMENT_TYPE.DEFAULT,testStats);
     const statAnswered = CreateGameElement("QuizStatsAnswered",GAME_ELEMENT_TYPE.DEFAULT,testStats);
-    const percent = Math.floor((Quiz.CorrectQuestions / Quiz.questions.length) * 100);
+    const percent = Math.floor((Quiz.CorrectQuestions / 10) * 100);
     statPercent.textContent = `${percent}%`;
     statAnswered.textContent = `${Quiz.CorrectQuestions} / 10`;
     ClearGameArea();
